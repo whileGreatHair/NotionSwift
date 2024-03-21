@@ -21,7 +21,7 @@ public struct DatabaseProperty {
     }
 }
 
-extension DatabaseProperty: Decodable {
+extension DatabaseProperty: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -32,5 +32,11 @@ extension DatabaseProperty: Decodable {
         self.id = try container.decode(Identifier.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
         self.type = try DatabasePropertyType(from: decoder)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
     }
 }

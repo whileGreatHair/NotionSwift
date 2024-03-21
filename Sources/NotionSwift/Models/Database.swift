@@ -48,8 +48,7 @@ public struct Database {
         self.isInline = isInline
     }
 }
-
-extension Database: Decodable {
+extension Database: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case url
