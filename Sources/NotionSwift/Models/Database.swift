@@ -67,3 +67,10 @@ extension Database: Codable {
 
 @available(iOS 13.0, *)
 extension Database: Identifiable {}
+
+extension Database {
+    public func getTitle() -> String {
+        return title.map { $0.plainText ?? "" }.joined()
+    }
+}
+
