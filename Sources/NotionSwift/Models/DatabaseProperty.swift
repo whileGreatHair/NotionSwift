@@ -38,5 +38,7 @@ extension DatabaseProperty: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
+        
+        try self.type.encode(to: encoder)
     }
 }

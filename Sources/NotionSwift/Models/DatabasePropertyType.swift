@@ -175,6 +175,8 @@ extension DatabasePropertyType.SelectOption: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(color, forKey: .color)
+        
+        try container.encode(self.id, forKey: .id)
     }
 }
 
@@ -241,6 +243,7 @@ extension DatabasePropertyType.StatusPropertConfirguration.StatusGroup: Codable 
 extension DatabasePropertyType: Codable {
     enum CodingKeys: String, CodingKey {
         case type
+        case unknown
 
         case title
         case richText = "rich_text"
@@ -352,6 +355,9 @@ extension DatabasePropertyType: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         let emptyObject: [String: String] = [:]
+        
+        let key = self.codingKey
+        try container.encode(key.stringValue, forKey: .type)
 
         switch self {
         case .title:
@@ -398,4 +404,33 @@ extension DatabasePropertyType: Codable {
             break
         }
     }
+}
+
+extension DatabasePropertyType {
+  var codingKey: CodingKeys {
+    switch self {
+    case .title: return .title
+    case .richText: return .richText
+    case .number: return .number
+    case .title: return .title
+    case .select: return .select
+    case .multiSelect: return .multiSelect
+    case .date: return .date
+    case .people: return .people
+    case .files: return .files
+    case .checkbox: return .checkbox
+    case .url: return .url
+    case .email: return .email
+    case .phoneNumber: return .phoneNumber
+    case .formula: return .formula
+    case .relation: return .relation
+    case .rollup: return .rollup
+    case .createdTime: return .createdTime
+    case .createdBy: return .createdBy
+    case .lastEditedTime: return .lastEditedTime
+    case .lastEditedBy: return .lastEditedBy
+    case .status: return .status
+    case .unknown: return .unknown
+    }
+  }
 }
