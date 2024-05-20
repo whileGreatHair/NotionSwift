@@ -70,7 +70,7 @@ extension Database: Identifiable {}
 
 extension Database {
     public func getTitle() -> String {
-        return title.map { $0.plainText ?? "" }.joined()
+        return title.map { $0.plainText ?? "No Title" }.joined()
     }
 }
 

@@ -51,7 +51,7 @@ extension DatabasePropertyType {
         public let name: String
         public let id: Identifier
         public let color: String
-
+        
         public init(
             name: String,
             id: Identifier = .init(),
@@ -69,7 +69,7 @@ extension DatabasePropertyType {
         public let databaseId: Database.Identifier
         public let syncedPropertyName: String?
         public let syncedPropertyId: DatabaseProperty.Identifier?
-
+        
         public init(
             databaseId: Database.Identifier,
             syncedPropertyName: String? = nil,
@@ -83,14 +83,14 @@ extension DatabasePropertyType {
 }
 
 extension DatabasePropertyType {
-
+    
     public struct RollupPropertyConfiguration {
         public let relationPropertyName: String
         public let relationPropertyId: DatabaseProperty.Identifier
         public let rollupPropertyName: String
         public let rollupPropertyId: DatabaseProperty.Identifier
         public let function: String
-
+        
         public init(
             relationPropertyName: String,
             relationPropertyId: DatabaseProperty.Identifier,
@@ -170,7 +170,7 @@ extension DatabasePropertyType.SelectOption: Codable {
         case id
         case color
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
@@ -184,7 +184,7 @@ extension DatabasePropertyType.NumberPropertyConfiguration: Codable {
     enum CodingKeys: String, CodingKey {
         case format
     }
-
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let format = try container.decode(String.self, forKey: .format)
@@ -193,15 +193,15 @@ extension DatabasePropertyType.NumberPropertyConfiguration: Codable {
             self = .unknown
             return
         }
-
+        
         self = value
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.rawValue, forKey: .format)
     }
-
+    
 }
 
 extension DatabasePropertyType.RelationPropertyConfiguration: Codable {
@@ -220,7 +220,7 @@ extension DatabasePropertyType.RollupPropertyConfiguration: Codable {
         case rollupPropertyId = "rollup_property_id"
         case function
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(relationPropertyName, forKey: .relationPropertyName)
@@ -266,15 +266,15 @@ extension DatabasePropertyType: Codable {
         case lastEditedBy = "last_edited_by"
         case status
     }
-
+    
     private struct _SelectOptionValueHelper: Codable {
         let options: [DatabasePropertyType.SelectOption]
     }
-
+    
     private struct _FormulaValueHelper: Codable {
         let expression: String
     }
-
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
@@ -351,7 +351,7 @@ extension DatabasePropertyType: Codable {
             self = .unknown
         }
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         let emptyObject: [String: String] = [:]
@@ -406,6 +406,37 @@ extension DatabasePropertyType: Codable {
     }
 }
 
+
+extension DatabasePropertyType {
+    public static func == (lhs: DatabasePropertyType, rhs: DatabasePropertyType) -> Bool {
+        switch (lhs, rhs) {
+        case (.title, .title),
+            (.richText, .richText),
+            (.number,.number),
+            (.select,.select),
+            (.multiSelect,.multiSelect),
+            (.date, .date),
+            (.people, .people),
+            (.files, .files),
+            (.checkbox, .checkbox),
+            (.url, .url),
+            (.email, .email),
+            (.phoneNumber, .phoneNumber),
+            (.formula, .formula),
+            (.relation, .relation),
+            (.rollup, .rollup),
+            (.createdTime, .createdTime),
+            (.createdBy, .createdBy),
+            (.lastEditedTime, .lastEditedTime),
+            (.lastEditedBy, .lastEditedBy),
+            (.status, .status),
+            (.unknown, .unknown):
+            return true
+            
+        default:
+              return false
+        }
+    }
 extension DatabasePropertyType {
   var codingKey: CodingKeys {
     switch self {
