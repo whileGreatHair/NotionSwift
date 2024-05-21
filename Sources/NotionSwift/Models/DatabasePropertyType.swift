@@ -434,9 +434,11 @@ extension DatabasePropertyType {
             return true
             
         default:
-              return false
+            return false
         }
     }
+}
+
 extension DatabasePropertyType {
   var codingKey: CodingKeys {
     switch self {
