@@ -42,3 +42,17 @@ extension DatabaseProperty: Codable {
         try self.type.encode(to: encoder)
     }
 }
+
+extension DatabaseProperty: Equatable {
+    public static func == (lhs: DatabaseProperty, rhs: DatabaseProperty) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension DatabaseProperty: Hashable {
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
+    }
+}
