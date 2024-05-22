@@ -70,6 +70,7 @@ extension DatabasePropertyFilter {
 extension DatabasePropertyFilter {
     public enum SimpleGenericCondition<T: Encodable> {
         case contains(T)
+        case equals(T)
         case doesNotContain(T)
         case isEmpty
         case isNotEmpty

@@ -221,6 +221,7 @@ extension DatabasePropertyFilter.NumberCondition: Encodable {
 extension DatabasePropertyFilter.SimpleGenericCondition: Encodable {
     enum CodingKeys: String, CodingKey {
         case contains
+        case equals
         case doesNotContain = "does_not_contain"
         case isEmpty = "is_empty"
         case isNotEmpty = "is_not_empty"
@@ -231,6 +232,8 @@ extension DatabasePropertyFilter.SimpleGenericCondition: Encodable {
         switch self {
         case .contains(let value):
             try container.encode(value, forKey: .contains)
+        case .equals(let value):
+            try container.encode(value, forKey: .equals)
         case .doesNotContain(let value):
             try container.encode(value, forKey: .doesNotContain)
         case .isEmpty:
