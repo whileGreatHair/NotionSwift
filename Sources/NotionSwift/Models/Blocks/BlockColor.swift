@@ -25,7 +25,7 @@ public enum BlockColor: Equatable {
     case redBackground
     case unknown(String)
     
-    init?(_ rawValue: String) {
+    public init?(_ rawValue: String) {
         let cases: [Self] = [.default,
                      .gray,
                      .brown,
