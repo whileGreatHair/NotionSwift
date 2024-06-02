@@ -17,7 +17,7 @@ public struct Page {
     public let cover: CoverFile?
     public let parent: PageParentType
     public let archived: Bool
-    public let properties: [PropertyName: PageProperty]
+    public var properties: [PropertyName: PageProperty]
     public let url: URL
     
     public init(
