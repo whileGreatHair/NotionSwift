@@ -69,7 +69,7 @@ extension NotionClientType {
         }
     }
 
-    func databaseUpdate(
+    public func databaseUpdate(
         databaseId: Database.Identifier,
         request: DatabaseUpdateRequest
     ) -> AnyPublisher<Database, NotionClientError> {

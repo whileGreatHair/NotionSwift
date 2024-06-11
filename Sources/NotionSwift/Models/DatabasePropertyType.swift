@@ -467,3 +467,7 @@ extension DatabasePropertyType {
     }
   }
 }
+
+extension DatabasePropertyType.SelectOption: Identifiable {
+  
+}
