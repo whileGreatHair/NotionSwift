@@ -19,6 +19,7 @@ extension DatabasePropertyFilter {
         case number(NumberCondition)
         case checkbox(CheckboxCondition)
         case select(SimpleGenericCondition<String>)
+        case status(SimpleGenericCondition<String>)
         case multiSelect(SimpleGenericCondition<String>)
         case date(DateCondition)
         case createdTime(DateCondition)

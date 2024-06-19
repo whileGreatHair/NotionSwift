@@ -14,6 +14,7 @@ extension DatabasePropertyFilter: Encodable {
         case number
         case checkbox
         case select
+        case status
         case multiSelect = "multi_select"
         case date
         case createdTime = "created_time"
@@ -48,6 +49,8 @@ extension DatabasePropertyFilter: Encodable {
             try container.encode(contition, forKey: .checkbox)
         case .select(let contition):
             try container.encode(contition, forKey: .select)
+        case .status(let contition):
+            try container.encode(contition, forKey: .status)
         case .multiSelect(let contition):
             try container.encode(contition, forKey: .multiSelect)
         case .date(let contition):
