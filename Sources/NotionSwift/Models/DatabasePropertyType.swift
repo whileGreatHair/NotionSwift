@@ -241,7 +241,7 @@ extension DatabasePropertyType.StatusPropertConfirguration.StatusGroup: Codable 
 }
 
 extension DatabasePropertyType: Codable {
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case type
         case unknown
 
@@ -440,7 +440,7 @@ extension DatabasePropertyType {
 }
 
 extension DatabasePropertyType {
-  var codingKey: CodingKeys {
+  public var codingKey: CodingKeys {
     switch self {
     case .title: return .title
     case .richText: return .richText
